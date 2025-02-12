@@ -1,0 +1,50 @@
+package library;
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class EdgeBrowserLaunch {
+
+	public static void main(String[] args) {
+
+System.setProperty("webdriver.edge.driver", "E:\\Selenium Projects\\msedgedriver.exe");
+System.setProperty("webdriver.http.factory", "jdk-http-client");
+
+WebDriver driver = new EdgeDriver();
+driver.manage().window().maximize();
+
+//driver.manage().deleteAllCookies();
+
+driver.get("https://www.automationanywhere.com/");
+
+
+
+WebElement cookieAccept = driver.findElement(By.xpath("//*[@id='onetrust-accept-btn-handler']"));
+
+// Explicit Wait
+WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+
+wait.until(ExpectedConditions.visibilityOf(cookieAccept));
+
+wait.until(ExpectedConditions.elementToBeClickable(cookieAccept));
+
+cookieAccept.click();
+
+
+
+
+
+//driver.findElement(By.linkText("https://www.automationanywhere.com/")); 
+////locator for Google search button
+WebElement searchIcon = driver.findElement(By.linkText("Request Demo"));
+searchIcon.click();
+
+
+	}
+
+}
